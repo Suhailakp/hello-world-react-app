@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     tools {
-        nodejs 'nodejs-22' // matches the name configured in Global Tools
+        nodejs 'NodeJS' // matches the name configured in Global Tools
     }
 
     environment {
