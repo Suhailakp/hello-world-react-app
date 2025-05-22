@@ -1,4 +1,3 @@
-
 pipeline {
     agent any
 
@@ -14,7 +13,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/Suhailakp/hello-world-react-app.git'
+                git branch: 'main', url: 'https://github.com/Suhailakp/hello-world-react-app.git'
             }
         }
 
