@@ -1,18 +1,20 @@
+
 pipeline {
     agent any
 
     tools {
-        nodejs 'NodeJS'  // Make sure "node18" is configured in Jenkins Global Tools
+        nodejs 'nodejs-22' // matches the name configured in Global Tools
     }
 
     environment {
-        REPO_URL = 'https://github.com/Suhailakp/hello-world-react-app.git'
+        BUILD_DIR = 'dist'
+        DEPLOY_PATH = '/root/hello-world-react'
     }
 
     stages {
-        stage('Clone Repo') {
+        stage('Clone Repository') {
             steps {
-                git url: "${REPO_URL}", branch: 'main'
+                git 'https://github.com/Suhailakp/hello-world-react.git'
             }
         }
 
@@ -22,30 +24,19 @@ pipeline {
             }
         }
 
-        stage('Build React App') {
+        stage('Build Project') {
             steps {
                 sh 'npm run build'
             }
         }
 
         stage('Deploy') {
-            when {
-                expression { fileExists('build') || fileExists('dist') }
-            }
             steps {
-                echo 'Deploy step placeholder – upload to server, move to Nginx folder, etc.'
-                // Example: sh 'scp -r build/ user@yourserver:/var/www/html'
+                sh '''
+                    sudo rm -rf $DEPLOY_PATH/*
+                    sudo cp -r $BUILD_DIR/* $DEPLOY_PATH/
+                '''
             }
-        }
-    }
-
-    post {
-        success {
-            echo 'Build completed successfully!'
-        }
-        failure {
-            echo 'Build failed.'
         }
     }
 }
-
