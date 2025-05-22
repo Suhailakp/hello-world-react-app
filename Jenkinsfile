@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/Suhailakp/hello-world-react.git'
+                git 'https://github.com/Suhailakp/hello-world-react-app.git'
             }
         }
 
