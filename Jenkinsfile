@@ -7,7 +7,7 @@ pipeline {
 
     environment {
         BUILD_DIR = 'dist'
-        DEPLOY_PATH = '/root/hello-world-react'
+        DEPLOY_PATH = '/home/hello-world-react'
     }
 
     stages {
